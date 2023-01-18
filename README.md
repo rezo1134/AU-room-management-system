@@ -17,4 +17,5 @@
       - User login credentials should not be stored as plain text in the Database
 
 ## Diagram
+![image](https://github.com/rezo1134/AU-room-management-system/blob/main/CSCI4711-RoomManagementSystem.drawio.png)
 
