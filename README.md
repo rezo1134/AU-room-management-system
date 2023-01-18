@@ -7,11 +7,14 @@
       - Startup
       - Login
       - Logout
-      - ????
-      - ????
+      - GetRooms
+      - ReserveRoom
   - There are 5 non-functional requirements:
       - Must be in Java or C# (we agreed on C#)
       - Non-web based system
       - System should have a User Interface
       - User input should be validated for appropriateness
       - User login credentials should not be stored as plain text in the Database
+
+## Diagram
+
