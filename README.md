@@ -7,8 +7,8 @@
       - Startup
       - Login
       - Logout
-      - GetRooms
       - ReserveRoom
+      - CancelReservation
   - There are 5 non-functional requirements:
       - Must be in Java or C# (we agreed on C#)
       - Non-web based system
@@ -17,5 +17,5 @@
       - User login credentials should not be stored as plain text in the Database
 
 ## Diagram
-![image](https://github.com/rezo1134/AU-room-management-system/blob/main/CSCI4711-RoomManagementSystem.drawio.png)
+![image](https://github.com/rezo1134/AU-room-management-system/blob/main/initialPresentation/UseCaseDiagram.png)
 
