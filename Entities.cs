@@ -22,6 +22,7 @@ namespace Entities
         }
     }
 
+
     public class Room
     {
         private int roomID { get; set; }
