@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity
 {
+    public class List<T>
+    {
+        public List<T> list { get; set; }
+        List(List<T> list)
+        {
+            this.list = list;
+        }
+    }
     public class Account
     {
         private string username { get; set; }
@@ -33,22 +42,44 @@ namespace Entity
             }
             set
             {
-
+                if (value < int.MaxValue)
+                    this.roomID = value;
             }
         }
         private string building { get; set; }
         public Room(int roomID, string building)
         {
-            this.roomID = roomID; //Validation not needed cause this is the db id number.
+            this.roomID = roomID;
             this.building = building;
         }
     }
 
     public class Reservation
     {
-        private int rid { get; set; }
+        private int rid
+        {
+            get
+            {
+                return this.rid;
+            }
+            set
+            {
+                if (value < int.MaxValue)
+                    this.rid = value;
+            }
+        }
         private string usn { get; set; }
-        private int roomID { get; set; }
+        private int roomID {
+            get
+            {
+                return this.roomID;
+            }
+            set
+            {
+                if (value < int.MaxValue)
+                    this.roomID = value;
+            }
+        }
         private DateTime dtg { get; set; }
 
         //For creating new reservations
