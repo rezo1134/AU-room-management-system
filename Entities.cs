@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace Entity
 {
     public class Account
     {
@@ -25,7 +25,17 @@ namespace Entities
 
     public class Room
     {
-        private int roomID { get; set; }
+        private int roomID 
+        {
+            get
+            {
+                return this.roomID; 
+            }
+            set
+            {
+
+            }
+        }
         private string building { get; set; }
         public Room(int roomID, string building)
         {
