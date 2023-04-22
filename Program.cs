@@ -22,8 +22,7 @@ namespace AU_room_management_system
             ApplicationConfiguration.Initialize();
 
             //Create the DBConnector object and initialize the DB
-            DBConnector dbconn = new DBConnector();
-            dbconn.initializeDB();
+            DBConnector.initializeDB();
 
             //Launch the Login page
             Application.Run(new LoginMenu());

@@ -1,7 +1,7 @@
 ﻿
 namespace Boundary
 {
-    partial class Room_Reservation
+    partial class ReserveForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,8 +40,9 @@ namespace Boundary
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(32, 36);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(37, 42);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 20);
             this.label1.TabIndex = 4;
@@ -49,58 +50,68 @@ namespace Boundary
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(268, 129);
+            this.monthCalendar1.Location = new System.Drawing.Point(313, 149);
+            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 5;
             // 
             // Time
             // 
             this.Time.FormattingEnabled = true;
-            this.Time.Location = new System.Drawing.Point(549, 140);
+            this.Time.ItemHeight = 15;
+            this.Time.Location = new System.Drawing.Point(640, 162);
+            this.Time.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Time.Name = "Time";
-            this.Time.Size = new System.Drawing.Size(206, 17);
+            this.Time.Size = new System.Drawing.Size(240, 19);
             this.Time.TabIndex = 6;
             this.Time.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // From
             // 
             this.From.FormattingEnabled = true;
-            this.From.Location = new System.Drawing.Point(549, 209);
+            this.From.ItemHeight = 15;
+            this.From.Location = new System.Drawing.Point(640, 241);
+            this.From.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.From.Name = "From";
-            this.From.Size = new System.Drawing.Size(206, 17);
+            this.From.Size = new System.Drawing.Size(240, 19);
             this.From.TabIndex = 7;
             // 
             // To
             // 
             this.To.FormattingEnabled = true;
-            this.To.Location = new System.Drawing.Point(549, 274);
+            this.To.ItemHeight = 15;
+            this.To.Location = new System.Drawing.Point(640, 316);
+            this.To.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.To.Name = "To";
-            this.To.Size = new System.Drawing.Size(206, 17);
+            this.To.Size = new System.Drawing.Size(240, 19);
             this.To.TabIndex = 8;
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(312, 347);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(326, 397);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 56);
+            this.button1.Size = new System.Drawing.Size(214, 65);
             this.button1.TabIndex = 9;
             this.button1.Text = "Make Reservation";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.submit);
             // 
-            // Room_Reservation
+            // ReserveForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(933, 519);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.To);
             this.Controls.Add(this.From);
             this.Controls.Add(this.Time);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label1);
-            this.Name = "Room_Reservation";
-            this.Text = "Room_Reservation";
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Name = "ReserveForm";
+            this.Text = "ReserveForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -7,19 +7,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Entity;
+using Controller;
 namespace Boundary
 {
-    public partial class Admin_Dashboard : Form
+    public partial class AdminDashboard : Form
     {
-        public Admin_Dashboard()
+        private Account userAccount;
+        Entity.List resourceList
+       
+        public AdminDashboard(Account userAccount, Entity.List resourceList)
         {
+            this.userAccount = userAccount;
+            this.resourceList = resourceList;
             InitializeComponent();
+
+            //
+            // All the reservations
+            //
+            foreach (Reservation reserve in resourceList.reservations)
+            {
+                this.Controls.Add(reserve); //Not quite sure how we want to do this. But a light wrapper code that accepts a Reservation/Room object and creates the card would be nice.
+            }
+            
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void logoutClick(object sender, EventArgs e)
         {
 
+        }
+
+        private void submitClick(object sender, EventArgs e)
+        { 
+            //We need to know Which component we've referenced for this. for now i'm using "this.card"
+            CancelController controller = new CancelController(this);
+            controller.submit(resid);
+            this.Close(); //Close immediately after sending deets to the Controller
+        }
+
+        public static void Launch(Account userAccount, Entity.List list)
+        {
+            new AdminDashboard(userAccount, list);
         }
     }
 }

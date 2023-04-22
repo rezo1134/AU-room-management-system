@@ -1,7 +1,7 @@
 ﻿
 namespace Boundary
 {
-    partial class Employee_Dashboard
+    partial class CancelForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,32 +37,32 @@ namespace Boundary
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(43, 34);
+            this.label1.Location = new System.Drawing.Point(36, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Employee Dashboard";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Size = new System.Drawing.Size(165, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Cancel Reservation";
+            this.label1.Click += new System.EventHandler(this.cancel);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(843, 34);
+            this.button1.Location = new System.Drawing.Point(301, 328);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 58);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Logout";
+            this.button1.Size = new System.Drawing.Size(183, 56);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Cancel Reservation";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // Employee_Dashboard
+            // CancelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 597);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Name = "Employee_Dashboard";
-            this.Text = "Employee_Dashboard";
+            this.Name = "CancelForm";
+            this.Text = "CancelForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

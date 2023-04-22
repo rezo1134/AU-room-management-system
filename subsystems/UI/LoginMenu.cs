@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
+using Entity;
 namespace Boundary
 {
     public partial class LoginMenu : Form
     {
-        LoginController controller = new LoginController();
+        
         public LoginMenu()
         {
             InitializeComponent();
@@ -23,10 +24,11 @@ namespace Boundary
             this.Close();
         }
 
-        private void enter_Click(object sender, EventArgs e)
+        private void submit(object sender, EventArgs e)
         {
             string username = this.username.Text;
             string password = this.password.Text;
+            LoginController controller = new LoginController(this);
             controller.userLogin(username, password);
         }
 
@@ -38,10 +40,10 @@ namespace Boundary
         {
 
         }
-        public void display(string message)
+        public static void display(string message)
         {
-            this.errorLabel.Text = message;
-            this.errorLabel.Visible = true;
+            MessageBox.Show(message);
         }
+        
     }
 }

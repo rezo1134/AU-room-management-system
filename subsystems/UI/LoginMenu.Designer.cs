@@ -61,7 +61,7 @@ namespace Boundary
             this.enter.TabIndex = 1;
             this.enter.Text = "Enter";
             this.enter.UseVisualStyleBackColor = true;
-            this.enter.Click += new System.EventHandler(this.enter_Click);
+            this.enter.Click += new System.EventHandler(this.submit);
             // 
             // username
             // 

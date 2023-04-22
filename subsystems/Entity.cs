@@ -7,12 +7,28 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
+
+    public class List
+    {
+        public List<Reservation> reservations;
+        public List<Room> rooms;
+
+        public List(List<Room> rooms) 
+        {
+            this.rooms = rooms;
+        }
+
+        public List(List<Reservation> reservations)
+        {
+            this.reservations = reservations;
+        }
+    }
     public class Account
     {
-        private string username { get; set; }
-        private string password { get; set; }
-        private string role { get; set; }
-        private string name { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string role { get; set; }
+        public string name { get; set; }
         public Account(string username, string role, string password, string name)
         {
             //Because this is all received from the db, validation is assumed to have happened.
@@ -26,7 +42,7 @@ namespace Entity
 
     public class Room
     {
-        private int roomID 
+        public int roomID 
         {
             get
             {
@@ -38,7 +54,7 @@ namespace Entity
                     this.roomID = value;
             }
         }
-        private string building { get; set; }
+        public string building { get; set; }
         public Room(int roomID, string building)
         {
             this.roomID = roomID;
@@ -48,20 +64,20 @@ namespace Entity
 
     public class Reservation
     {
-        private int rid
+        public int resID
         {
             get
             {
-                return this.rid;
+                return this.resID;
             }
             set
             {
                 if (value < int.MaxValue)
-                    this.rid = value;
+                    this.resID = value;
             }
         }
-        private string usn { get; set; }
-        private int roomID {
+        public Account user { get; set; }
+        public int roomID {
             get
             {
                 return this.roomID;
@@ -72,12 +88,17 @@ namespace Entity
                     this.roomID = value;
             }
         }
-        private DateTime dtg { get; set; }
+        public DateTime dtg { get; set; }
 
         //For creating new reservations
-        public Reservation(string usn, int roomID, string datetime)
+        public Reservation(Account userAccount, int roomID)
         {
-            this.usn = usn;
+            this.user = userAccount;
+            this.roomID = roomID;
+        }
+        public Reservation(Account userAccount, int roomID, string datetime)
+        {
+            this.user = userAccount;
             this.roomID = roomID;
             DateTime dt;
             if (DateTime.TryParse(datetime, out dt) == true)
@@ -87,10 +108,10 @@ namespace Entity
         }
 
         //For grabbing old reservations from DB
-        public Reservation(int rid, string usn, int roomID, DateTime dtg)
+        public Reservation(int resID, Account userAccount, int roomID, DateTime dtg)
         {
-            this.rid = rid;
-            this.usn = usn;
+            this.resID = resID;
+            this.user = userAccount;
             this.roomID=roomID;
             this.dtg = dtg;
         }

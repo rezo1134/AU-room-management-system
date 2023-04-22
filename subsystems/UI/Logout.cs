@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Controller;
+using Entity;
 namespace Boundary
 {
     public partial class Logout : Form
@@ -17,9 +18,12 @@ namespace Boundary
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void resetClick(object sender, EventArgs e)
         {
+            //We again need the userAccount object to save
+            LogoutController.logout(userAccount);
             this.Close();
+
         }
     }
 }
