@@ -6,21 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Boundary;
 using Entity;
-
+using Boundary;
 namespace Controller
 {
     public abstract class Controller
     {
         public Boundary.Form form { get; set; }
         public DBConnector dbconn { get; set; }
-        
-        protected Controller(Boundary.Form form, DBConnector dbconn) 
-        {
-            this.form = form;
-            this.dbconn = dbconn;
-        }
-    }
 
+        //protected Controller(Boundary.Form form, DBConnector dbconn) 
+        //{
+        //    this.form = form;
+        //    this.dbconn = dbconn;
+        //}
+        protected Controller() { }
+    }
+    
     public class DBConnector
     {
         public DBConnector()
@@ -52,8 +53,8 @@ namespace Controller
             //Reservations for the Admin, or Rooms for the User
 
             return null;
-            
-            
+
+
         }
 
         public void Save(Reservation reservation)
@@ -82,7 +83,7 @@ namespace Controller
 
     public class LoginController : Controller
     {
-        public LoginController(Boundary.Form form, DBConnector dbconn): base(form, dbconn)
+        public LoginController() : base()
         {
             //This is the Login Controller Constructor
         }
@@ -102,14 +103,15 @@ namespace Controller
                 return userAccount;
             }
             Account emptyAccount = new Account("empty", "empty", "empty", "empty");
-            this.form.display("Error Message");
+            Boundary.LoginMenu.display("Incorrect Username or Password; Please Try Again.");
             return emptyAccount;
 
         }
     }
-    public class ReserveController: Controller
+    
+    public class ReserveController : Controller
     {
-        public ReserveController(Boundary.Form form, DBConnector dbconn): base(form, dbconn)
+        public ReserveController() : base()
         {
             //This is the Constructor for the ReserveController
 
@@ -118,7 +120,7 @@ namespace Controller
         {
             //This method creates a reservation object
             Reservation reservation = new Reservation(username, roomID, DateTime.Now.ToString());
-            
+
             //Then it creates and calls display from the ReserveForm
         }
 
@@ -128,16 +130,15 @@ namespace Controller
         }
     }
 
-
-    public class CancelController: Controller
+    public class CancelController : Controller
     {
-        public CancelController(Boundary.Form form, DBConnector dbconn) : base(form, dbconn){ }
+        public CancelController() : base() { }
 
         public void cancel(int rid)
         {
             //This method cancels a reservation based on the Reservation Primary Key in the DB
             this.dbconn.cancelReservation(rid);
-            
+
             //Then we need to call the this.dbconn.getReservation
 
             //Then we need to create and launch the AdminDashboard with the new list.
@@ -147,18 +148,6 @@ namespace Controller
         {
             //This method sumbits a getReservation request to the dbconnector and gets a reservation in return
             Reservation reservation = this.dbconn.getReservation(rid);
-        }
-    }
-
-
-    public class LogoutController: Controller
-    {
-        public LogoutController(Boundary.Form form, DBConnector dBConnector) : base(form, dBConnector) { }
-
-        public void logout(string username)
-        {
-            this.dbconn.SaveLogout(username, DateTime.Now.ToString());
-            //Then re-open the login page fresh
         }
     }
 }

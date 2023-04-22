@@ -1,5 +1,5 @@
 ﻿
-namespace AU_room_management_UI
+namespace Boundary
 {
     partial class Cancel_Reservation
     {

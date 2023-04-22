@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AU_room_management_UI
+namespace Boundary
 {
     public partial class Admin_Dashboard : Form
     {

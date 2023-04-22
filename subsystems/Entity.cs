@@ -7,14 +7,6 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class List<T>
-    {
-        public List<T> list { get; set; }
-        List(List<T> list)
-        {
-            this.list = list;
-        }
-    }
     public class Account
     {
         private string username { get; set; }

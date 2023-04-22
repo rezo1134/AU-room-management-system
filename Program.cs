@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AU_room_management_UI;
+using Boundary;
+using Entity;
+using Controller;
 namespace AU_room_management_system
 {
     internal static class Program
@@ -16,8 +18,15 @@ namespace AU_room_management_system
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            //Initialize the application Configuration
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+
+            //Create the DBConnector object and initialize the DB
+            DBConnector dbconn = new DBConnector();
+            dbconn.initializeDB();
+
+            //Launch the Login page
+            Application.Run(new LoginMenu());
         }
     }
 }
