@@ -21,6 +21,7 @@ namespace Boundary
         private void resetClick(object sender, EventArgs e)
         {
             //We again need the userAccount object to save
+            Account userAccount = new Account("jawilt", "admin", "test123", "James");
             LogoutController.logout(userAccount);
             this.Close();
 

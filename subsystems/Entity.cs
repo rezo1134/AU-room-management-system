@@ -4,10 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Entity
 {
-
     public class List
     {
         public List<Reservation> reservations;
@@ -64,28 +62,36 @@ namespace Entity
 
     public class Reservation
     {
+        private int _resID;
         public int resID
         {
             get
             {
-                return this.resID;
+                return this._resID;
             }
             set
             {
                 if (value < int.MaxValue)
-                    this.resID = value;
+                    this._resID = value;
             }
         }
         public Account user { get; set; }
+        private int _roomID;
         public int roomID {
             get
             {
-                return this.roomID;
+                return this._roomID;
             }
             set
             {
                 if (value < int.MaxValue)
-                    this.roomID = value;
+                    _roomID = value;
+                else
+                {
+                    this.roomID = -1;
+                    throw new Exception("BAD VALUE");
+                }
+                    
             }
         }
         public DateTime dtg { get; set; }

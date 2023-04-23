@@ -70,7 +70,6 @@ namespace Boundary
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(346, 23);
             this.username.TabIndex = 3;
-            this.username.TextChanged += new System.EventHandler(this.usernameTextChanged);
             // 
             // label1
             // 

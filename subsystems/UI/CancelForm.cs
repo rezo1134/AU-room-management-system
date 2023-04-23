@@ -21,7 +21,8 @@ namespace Boundary
         private void cancel(object sender, EventArgs e)
         {
             //Gotta somehow get the resID from the reservation in the display event
-            CancelController.cancel(reservation.resID);
+            Reservation reservation = new Reservation(1, new Account("jawilt", "admin", "test123", "James"), 1, DateTime.Now);
+            CancelController.cancel(reservation);
         }
 
         public void display(Reservation reservation)

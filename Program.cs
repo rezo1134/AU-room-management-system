@@ -20,12 +20,12 @@ namespace AU_room_management_system
             // see https://aka.ms/applicationconfiguration.
             //Initialize the application Configuration
             ApplicationConfiguration.Initialize();
-
             //Create the DBConnector object and initialize the DB
             DBConnector.initializeDB();
 
             //Launch the Login page
-            Application.Run(new LoginMenu());
+            new LoginMenu().Show();
+            Application.Run();
         }
     }
 }

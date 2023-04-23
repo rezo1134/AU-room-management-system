@@ -21,12 +21,14 @@ namespace Boundary
         public void display(Room room)
         {
             //This again assumes that we have a way to map a reservation object to a Form
-            this.Controls.Add(room);
+            //this.Controls.Add(room);
+            Console.WriteLine(room);
         }
 
         private void submit(object sender, EventArgs e)
         {
             //Have to again map the Form data back to a reservation
+            Reservation room = new Reservation(new Account("jawilt", "admin", "test123", "James"), 1); //Fake Data
             ReserveController.submit(room);
             this.Close();
         }

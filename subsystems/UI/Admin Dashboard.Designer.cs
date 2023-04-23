@@ -44,6 +44,7 @@ namespace Boundary
             this.logout.TabIndex = 2;
             this.logout.Text = "Logout";
             this.logout.UseVisualStyleBackColor = true;
+            this.logout.Click += new System.EventHandler(this.logoutClick);
             // 
             // label1
             // 
@@ -55,7 +56,6 @@ namespace Boundary
             this.label1.Size = new System.Drawing.Size(152, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Dashboard";
-            this.label1.Click += new System.EventHandler(this.logoutClick);
             // 
             // AdminDashboard
             // 

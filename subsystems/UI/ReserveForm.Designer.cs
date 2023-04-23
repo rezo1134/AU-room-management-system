@@ -64,7 +64,6 @@ namespace Boundary
             this.Time.Name = "Time";
             this.Time.Size = new System.Drawing.Size(240, 19);
             this.Time.TabIndex = 6;
-            this.Time.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // From
             // 

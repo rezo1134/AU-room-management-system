@@ -14,7 +14,7 @@ namespace Boundary
     public partial class AdminDashboard : Form
     {
         private Account userAccount;
-        Entity.List resourceList
+        Entity.List resourceList;
        
         public AdminDashboard(Account userAccount, Entity.List resourceList)
         {
@@ -27,7 +27,8 @@ namespace Boundary
             //
             foreach (Reservation reserve in resourceList.reservations)
             {
-                this.Controls.Add(reserve); //Not quite sure how we want to do this. But a light wrapper code that accepts a Reservation/Room object and creates the card would be nice.
+                //this.Controls.Add(reserve); //Not quite sure how we want to do this. But a light wrapper code that accepts a Reservation/Room object and creates the card would be nice.
+                Console.WriteLine(reserve.ToString());
             }
             
         }
@@ -41,13 +42,14 @@ namespace Boundary
         { 
             //We need to know Which component we've referenced for this. for now i'm using "this.card"
             CancelController controller = new CancelController(this);
-            controller.submit(resid);
+            //controller.submit(resid);
+            controller.submit(1);
             this.Close(); //Close immediately after sending deets to the Controller
         }
 
         public static void Launch(Account userAccount, Entity.List list)
         {
-            new AdminDashboard(userAccount, list);
+            new AdminDashboard(userAccount, list).Show();
         }
     }
 }
