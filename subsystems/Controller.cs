@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Controller
         public static void initializeDB()
         {
             //DB Initialization. This should read data in from a flat file and create all the tables
-            Console.WriteLine("Initialized");
+            Debug.WriteLine("Initialized");
         }
 
         public static Account getUserAccount(string username, string password)
@@ -36,7 +37,7 @@ namespace Controller
         public static void saveLogin(Account userAccount)
         {
             //This method saves the login user and time to the database
-            Console.WriteLine("Saved Login");
+            Debug.WriteLine("Saved Login");
         }
 
         public static Entity.List getList(Account userAccount)
@@ -45,40 +46,43 @@ namespace Controller
             //Reservations for the Admin, or Rooms for the User
             Entity.List list;
             if (userAccount.role == "admin")
-                list = new Entity.List(new List<Reservation>() { new Reservation(userAccount, 1) });
+                list = new Entity.List(new List<Reservation>() 
+                {
+                    new Reservation(1, userAccount, 1, DateTime.Now) , new Reservation(2, userAccount, 2, DateTime.Now), new Reservation(3, userAccount, 3, DateTime.Now), 
+                    new Reservation(4, userAccount, 4, DateTime.Now), new Reservation(5, userAccount, 5, DateTime.Now), new Reservation(6, userAccount, 6, DateTime.Now), 
+                    new Reservation(7, userAccount, 7, DateTime.Now), new Reservation(8, userAccount, 8, DateTime.Now), new Reservation(9, userAccount, 9, DateTime.Now), 
+                    new Reservation(10, userAccount, 10, DateTime.Now) });
             else if (userAccount.role == "employee")
                 list = new Entity.List(new List<Room>() { new Room(1, "hull mcknight") });
             else
                 list = new Entity.List(new List<Room>() { });
             return list;
-
-
         }
 
         public static void Save(Reservation reservation)
         {
             //This method saves a new reservation to the Database
-            Console.WriteLine("Saved Reservation");
+            Debug.WriteLine("Saved Reservation");
         }
 
         public static Reservation getReservation(int resID)
         {
             //This method needs to query the database for the reservation based on the resID
             DateTime dt = DateTime.Now;
-            Reservation reservation = new Reservation(new Account("jawilt", "admin", "test123", "James"), resID, dt.ToString());
+            Reservation reservation = new Reservation(resID, new Account("jawilt", "admin", "test123", "James"), resID, dt.ToString());
             return reservation;
         }
 
         public static void cancelReservation(int resID)
         {
             //This method Deletes a Reservation from the database via the resID primary key
-            Console.WriteLine("Cancelled Reservation");
+            Debug.WriteLine("Cancelled Reservation");
         }
 
         public static void saveLogout(Account userAccount, string time)
         {
             //This method saves the logout of username and time
-            Console.WriteLine("Saved Logout");
+            Debug.WriteLine("Saved Logout");
         }
     }
 
@@ -106,17 +110,19 @@ namespace Controller
                 {
                     LoginMenu.display("Incorrect Username or Password; Please Try Again.");
                 }
-                this.form.Close();
+                
                 DBConnector.saveLogin(userAccount);
                 Entity.List resourceList = DBConnector.getList(userAccount);
                 
                 if (userAccount.role == "admin")
                 {
                     AdminDashboard.Launch(userAccount, resourceList);
+                    this.form.Close();
                 }
                 else if (userAccount.role == "employee")
                 {
                     EmployeeDashboard.Launch(userAccount, resourceList);
+                    this.form.Close();
                 }
                
             }
@@ -177,7 +183,8 @@ namespace Controller
         {
             //This method sumbits a getReservation request to the dbconnector and gets a reservation in return
             Reservation reservation = DBConnector.getReservation(resID);
-            this.form = new CancelForm(); // Create the ReserveForm
+            this.form = new CancelForm(reservation); // Create the ReserveForm
+            this.form.Show();
             //this.form.display(reservation);
 
         }
@@ -192,7 +199,7 @@ namespace Controller
         public static void logout(Account userAccount)
         {
             DBConnector.saveLogout(userAccount, DateTime.Now.ToString());
-            new LoginMenu().Show();
+            new LogoutMenu().Show();
         }
     }
 }

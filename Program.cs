@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,8 +23,8 @@ namespace AU_room_management_system
             ApplicationConfiguration.Initialize();
             //Create the DBConnector object and initialize the DB
             DBConnector.initializeDB();
-
             //Launch the Login page
+            Debug.WriteLine("Initialzing Appform");
             new LoginMenu().Show();
             Application.Run();
         }

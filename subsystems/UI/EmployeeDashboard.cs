@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Boundary
             //
             foreach (Room room in resourceList.rooms)
             {
+                Debug.WriteLine("Adding Rooms");
                 //this.Controls.Add(room); //Not quite sure how we want to do this. But a light wrapper code that accepts a Reservation/Room object and creates the card would be nice.
 
             }
@@ -33,7 +35,8 @@ namespace Boundary
 
         private void logoutClick(object sender, EventArgs e)
         {
-
+            LogoutController.logout(new Account("jawilt", "employee", "test123", "James"));
+            this.Close();
         }
 
         private void reservationClick(object sender, EventArgs e)
@@ -49,6 +52,5 @@ namespace Boundary
         {
             new EmployeeDashboard(userAccount, list);
         }
-
     }
 }

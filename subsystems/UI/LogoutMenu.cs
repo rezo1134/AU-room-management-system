@@ -11,19 +11,19 @@ using Controller;
 using Entity;
 namespace Boundary
 {
-    public partial class Logout : Form
+    public partial class LogoutMenu : Form
     {
-        public Logout()
+        public LogoutMenu()
         {
             InitializeComponent();
         }
 
         private void resetClick(object sender, EventArgs e)
         {
-            //We again need the userAccount object to save
-            Account userAccount = new Account("jawilt", "admin", "test123", "James");
-            LogoutController.logout(userAccount);
+            //We again need the userAccount object to 
             this.Close();
+            new LoginMenu().Show();
+            
 
         }
     }

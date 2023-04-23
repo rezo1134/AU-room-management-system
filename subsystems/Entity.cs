@@ -112,6 +112,17 @@ namespace Entity
                 this.dtg = dt;
             }
         }
+        public Reservation(int resID, Account userAccount, int roomID, string datetime)
+        {
+            this.resID = resID;
+            this.user = userAccount;
+            this.roomID = roomID;
+            DateTime dt;
+            if (DateTime.TryParse(datetime, out dt) == true)
+            {
+                this.dtg = dt;
+            }
+        }
 
         //For grabbing old reservations from DB
         public Reservation(int resID, Account userAccount, int roomID, DateTime dtg)

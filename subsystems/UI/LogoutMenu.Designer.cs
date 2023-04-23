@@ -1,7 +1,7 @@
 ﻿
 namespace Boundary
 {
-    partial class Logout
+    partial class LogoutMenu
     {
         /// <summary>
         /// Required designer variable.

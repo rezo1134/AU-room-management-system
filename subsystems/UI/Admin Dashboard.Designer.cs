@@ -37,7 +37,7 @@ namespace Boundary
             // 
             this.logout.AutoSize = true;
             this.logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.logout.Location = new System.Drawing.Point(1114, 19);
+            this.logout.Location = new System.Drawing.Point(1008, 19);
             this.logout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(154, 67);
@@ -49,11 +49,11 @@ namespace Boundary
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(35, 42);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 20);
+            this.label1.Size = new System.Drawing.Size(202, 26);
             this.label1.TabIndex = 3;
             this.label1.Text = "Admin Dashboard";
             // 
@@ -62,7 +62,7 @@ namespace Boundary
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1281, 1064);
+            this.ClientSize = new System.Drawing.Size(1230, 715);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logout);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
