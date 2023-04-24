@@ -28,7 +28,7 @@ namespace Boundary
         private void submit(object sender, EventArgs e)
         {
             //Have to again map the Form data back to a reservation
-            Reservation room = new Reservation(new Account("jawilt", "admin", "test123", "James"), 1); //Fake Data
+            Reservation room = new Reservation(new Account("jawilt", "admin", "test123", "James"), new Room(1, "Mcknight")); //Fake Data
             ReserveController.submit(room);
             this.Close();
         }

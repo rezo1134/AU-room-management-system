@@ -38,13 +38,20 @@ namespace Boundary
                 Label rlabel = new Label();
                 GroupBox rgroupBox = new GroupBox();
                 Button rbutton = new Button();
+                Label room = new Label();
+                Label room2 = new Label();
+                Label building = new Label();
+                Label building2 = new Label();
+                Label employee = new Label();
+                Label employee2 = new Label();
                 innercard.SuspendLayout();
                 card.SuspendLayout();
+                rgroupBox.SuspendLayout();
                 this.SuspendLayout();
 
                 //Configure the Card
                 card.Controls.Add(innercard);
-                card.Name = $"Card-{reserve.roomID}-Background";
+                card.Name = $"Card-{reserve.room.roomID}-Background";
                 card.Size = new Size(210, 238);
                 card.Location = new Point(panelPosX, panelPosY);
                 card.BackColor = Color.Black;
@@ -77,15 +84,70 @@ namespace Boundary
 
                 //Configure the groupbox
                 rgroupBox.Location = new System.Drawing.Point(17, 44);
-                rgroupBox.Name = $"GroupBox-{reserve.roomID}";
+                rgroupBox.Name = $"GroupBox-{reserve.room.roomID}";
                 rgroupBox.Size = new System.Drawing.Size(176, 126);
                 rgroupBox.TabIndex = 1;
                 rgroupBox.TabStop = false;
+                rgroupBox.Controls.Add(room);
+                rgroupBox.Controls.Add(room2);
+                rgroupBox.Controls.Add(building);
+                rgroupBox.Controls.Add(building2);
+                rgroupBox.Controls.Add(employee);
+                rgroupBox.Controls.Add(employee2);
+
+                //Configure inner groupBox
+                room.AutoSize = true;
+                room.Font = new Font("Segoe UI", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point);
+                room.Location = new Point(10, 33);
+                room.Name = "Room Number";
+                room.Size = new Size(127, 21);
+                room.TabIndex = 0;
+                room.Text = $"Room Number:";
+
+                room2.AutoSize = true;
+                room2.Font = new Font("Segoe UI", 12F, GraphicsUnit.Point);
+                room2.Location = new Point(130, 33);
+                room2.Name = $"{reserve.room.roomID}";
+                room2.Size = new Size(127, 21);
+                room2.TabIndex = 0;
+                room2.Text = $"{reserve.room.roomID}";
+
+                building.AutoSize = true;
+                building.Font = new Font("Segoe UI", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point);
+                building.Location = new Point(10, 53);
+                building.Name = "Building";
+                building.Size = new Size(127, 21);
+                building.TabIndex = 0;
+                building.Text = $"Building:";
+
+                building2.AutoSize = true;
+                building2.Font = new Font("Segoe UI", 12F, GraphicsUnit.Point);
+                building2.Location = new Point(85, 53);
+                building2.Name = $"{reserve.room.building}";
+                building2.Size = new Size(127, 21);
+                building2.TabIndex = 0;
+                building2.Text = $"{reserve.room.building}";
+
+                employee.AutoSize = true;
+                employee.Font = new Font("Segoe UI", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point);
+                employee.Location = new Point(10, 73);
+                employee.Name = "Employee";
+                employee.Size = new Size(127, 21);
+                employee.TabIndex = 0;
+                employee.Text = $"Employee:";
+
+                employee2.AutoSize = true;
+                employee2.Font = new Font("Segoe UI", 12F, GraphicsUnit.Point);
+                employee2.Location = new Point(95, 73);
+                employee2.Name = $"{reserve.user.name}";
+                employee2.Size = new Size(127, 21);
+                employee2.TabIndex = 0;
+                employee2.Text = $"{reserve.user.name}";
 
                 //Configure the Button
-                rbutton.Location = new System.Drawing.Point(66, 176);
+                rbutton.Location = new Point(66, 176);
                 rbutton.Name = $"Button-{reserve.resID}";
-                rbutton.Size = new System.Drawing.Size(78, 46);
+                rbutton.Size = new Size(78, 46);
                 rbutton.TabIndex = 2;
                 rbutton.Text = "Cancel";
                 rbutton.UseVisualStyleBackColor = true;
@@ -94,6 +156,7 @@ namespace Boundary
 
                 //Add the card to the window
                 this.Controls.Add(card);
+                rgroupBox.ResumeLayout(false);
                 card.ResumeLayout(false);
                 card.PerformLayout();
                 this.ResumeLayout(false);

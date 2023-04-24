@@ -40,16 +40,17 @@ namespace Entity
 
     public class Room
     {
+        private int _roomID;
         public int roomID 
         {
             get
             {
-                return this.roomID; 
+                return this._roomID; 
             }
             set
             {
                 if (value < int.MaxValue)
-                    this.roomID = value;
+                    this._roomID = value;
             }
         }
         public string building { get; set; }
@@ -77,46 +78,30 @@ namespace Entity
         }
         public Account user { get; set; }
         private int _roomID;
-        public int roomID {
-            get
-            {
-                return this._roomID;
-            }
-            set
-            {
-                if (value < int.MaxValue)
-                    _roomID = value;
-                else
-                {
-                    this.roomID = -1;
-                    throw new Exception("BAD VALUE");
-                }
-                    
-            }
-        }
+        public Room room { get; set; }
         public DateTime dtg { get; set; }
 
         //For creating new reservations
-        public Reservation(Account userAccount, int roomID)
+        public Reservation(Account userAccount, Room room)
         {
             this.user = userAccount;
-            this.roomID = roomID;
+            this.room = room;
         }
-        public Reservation(Account userAccount, int roomID, string datetime)
+        public Reservation(Account userAccount, Room room, string datetime)
         {
             this.user = userAccount;
-            this.roomID = roomID;
+            this.room = room;
             DateTime dt;
             if (DateTime.TryParse(datetime, out dt) == true)
             {
                 this.dtg = dt;
             }
         }
-        public Reservation(int resID, Account userAccount, int roomID, string datetime)
+        public Reservation(int resID, Account userAccount, Room room, string datetime)
         {
             this.resID = resID;
             this.user = userAccount;
-            this.roomID = roomID;
+            this.room = room;
             DateTime dt;
             if (DateTime.TryParse(datetime, out dt) == true)
             {
@@ -125,11 +110,11 @@ namespace Entity
         }
 
         //For grabbing old reservations from DB
-        public Reservation(int resID, Account userAccount, int roomID, DateTime dtg)
+        public Reservation(int resID, Account userAccount, Room room, DateTime dtg)
         {
             this.resID = resID;
             this.user = userAccount;
-            this.roomID=roomID;
+            this.room = room;
             this.dtg = dtg;
         }
     }

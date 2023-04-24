@@ -29,8 +29,18 @@ namespace Controller
         public static Account getUserAccount(string username, string password)
         {
             //This methoud should Query the DB for an account, and then return the info in an Account Object
-            Account userAccount = new Account("jawilt", "admin", "test123", "James");
-            return userAccount;
+            if (username == "admin")
+            {
+                Account userAccount = new Account("jawilt", "admin", "test123", "James");
+                return userAccount;
+            }
+            else
+            {
+                Account userAccount = new Account("jawilt", "employee", "test123", "James");
+                return userAccount;
+            }
+
+            
 
         }
 
@@ -46,14 +56,9 @@ namespace Controller
             //Reservations for the Admin, or Rooms for the User
             Entity.List list;
             if (userAccount.role == "admin")
-                list = new Entity.List(new List<Reservation>() 
-                {
-                    new Reservation(1, userAccount, 1, DateTime.Now) , new Reservation(2, userAccount, 2, DateTime.Now), new Reservation(3, userAccount, 3, DateTime.Now), 
-                    new Reservation(4, userAccount, 4, DateTime.Now), new Reservation(5, userAccount, 5, DateTime.Now), new Reservation(6, userAccount, 6, DateTime.Now), 
-                    new Reservation(7, userAccount, 7, DateTime.Now), new Reservation(8, userAccount, 8, DateTime.Now), new Reservation(9, userAccount, 9, DateTime.Now), 
-                    new Reservation(10, userAccount, 10, DateTime.Now) });
+                list = new Entity.List(new List<Reservation>() {new Reservation(1, userAccount, new Room(1, "Mcknight"), DateTime.Now) });
             else if (userAccount.role == "employee")
-                list = new Entity.List(new List<Room>() { new Room(1, "hull mcknight") });
+                list = new Entity.List(new List<Room>() { new Room(1, "Mcknight") });
             else
                 list = new Entity.List(new List<Room>() { });
             return list;
@@ -69,7 +74,7 @@ namespace Controller
         {
             //This method needs to query the database for the reservation based on the resID
             DateTime dt = DateTime.Now;
-            Reservation reservation = new Reservation(resID, new Account("jawilt", "admin", "test123", "James"), resID, dt.ToString());
+            Reservation reservation = new Reservation(resID, new Account("jawilt", "admin", "test123", "James"), new Room(1, "Mcknight"), dt.ToString());
             return reservation;
         }
 
@@ -141,7 +146,8 @@ namespace Controller
         {
             //This method creates a reservation object
             Room room = new Room(roomID, building); //placeholder time for creation
-            this.form = new ReserveForm(); // Create the ReserveForm
+            this.form = new ReserveForm();
+            this.form.Show(); // Create the ReserveForm
             //this.form.display(room);
 
             //Then it creates and calls display from the ReserveForm

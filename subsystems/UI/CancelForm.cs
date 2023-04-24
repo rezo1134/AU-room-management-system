@@ -74,7 +74,7 @@ namespace Boundary
             RoomNumber2.Name = "Room Number2";
             RoomNumber2.Size = new Size(127, 21);
             RoomNumber2.TabIndex = 1;
-            RoomNumber2.Text = $"{reserve.roomID}";
+            RoomNumber2.Text = $"{reserve.room.roomID}";
 
 
             // Building
