@@ -16,7 +16,7 @@ namespace Boundary
     {
         public Account userAccount;
         public Entity.List resourceList;
-        public EmployeeDashboard(Account userAccount, Entity.List resourceList): base()
+        public EmployeeDashboard(Account userAccount, Entity.List resourceList) : base()
         {
             this.userAccount = userAccount;
             this.resourceList = resourceList;
@@ -142,12 +142,6 @@ namespace Boundary
 
         }
 
-        private void logoutClick(object sender, EventArgs e)
-        {
-            LogoutController.logout(new Account("jawilt", "employee", "test123", "James"));
-            this.Close();
-        }
-
         private void reservationClick(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -161,6 +155,12 @@ namespace Boundary
         public static void Launch(Account userAccount, Entity.List list)
         {
             new EmployeeDashboard(userAccount, list).Show();
+        }
+
+        private void logoutClick(object sender, EventArgs e)
+        {
+            LogoutController.logout(new Account("jawilt", "employee", "test123", "James"));
+            this.Close();
         }
     }
 }
