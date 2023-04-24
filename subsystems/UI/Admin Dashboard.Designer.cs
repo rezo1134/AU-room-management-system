@@ -67,6 +67,7 @@ namespace Boundary
             this.Controls.Add(this.logout);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "AdminDashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminDashboard";
             this.ResumeLayout(false);
             this.PerformLayout();

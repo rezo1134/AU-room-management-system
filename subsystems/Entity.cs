@@ -77,37 +77,8 @@ namespace Entity
             }
         }
         public Account user { get; set; }
-        private int _roomID;
         public Room room { get; set; }
-        public DateTime dtg { get; set; }
-
-        //For creating new reservations
-        public Reservation(Account userAccount, Room room)
-        {
-            this.user = userAccount;
-            this.room = room;
-        }
-        public Reservation(Account userAccount, Room room, string datetime)
-        {
-            this.user = userAccount;
-            this.room = room;
-            DateTime dt;
-            if (DateTime.TryParse(datetime, out dt) == true)
-            {
-                this.dtg = dt;
-            }
-        }
-        public Reservation(int resID, Account userAccount, Room room, string datetime)
-        {
-            this.resID = resID;
-            this.user = userAccount;
-            this.room = room;
-            DateTime dt;
-            if (DateTime.TryParse(datetime, out dt) == true)
-            {
-                this.dtg = dt;
-            }
-        }
+        public DateTime dtg { get; set; } 
 
         //For grabbing old reservations from DB
         public Reservation(int resID, Account userAccount, Room room, DateTime dtg)

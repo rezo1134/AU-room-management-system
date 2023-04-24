@@ -14,10 +14,12 @@ namespace Boundary
     public partial class CancelForm : Form
     {
         internal Reservation reservation;
-        public CancelForm(Reservation reserve):base()
+        internal Account userAccount;
+        public CancelForm(Account userAccount, Reservation reserve):base()
         {
             InitializeComponent();
             this.reservation = reserve;
+            this.userAccount = userAccount;
             Panel backgroundPanel = new Panel();
             Panel cPanel = new Panel();
             Label RoomNumber = new Label();
@@ -92,7 +94,7 @@ namespace Boundary
             Building2.Name = "Building2";
             Building2.Size = new Size(79, 21);
             Building2.TabIndex = 3;
-            Building2.Text = $"{reserve.user.username}";
+            Building2.Text = $"{reserve.room.building}";
 
             // Employee
             Employee.AutoSize = true;
@@ -126,7 +128,7 @@ namespace Boundary
             Date2.Name = "Date2";
             Date2.Size = new Size(50, 21);
             Date2.TabIndex = 3;
-            Date2.Text = $"{reserve.dtg.Month}-{reserve.dtg.Day}-{reserve.dtg.Year}";
+            Date2.Text = $"{reserve.dtg.ToString().Split(' ')[0]}";
 
             // Time
             Time.AutoSize = true;
@@ -143,7 +145,7 @@ namespace Boundary
             Time2.Name = "Time2";
             Time2.Size = new Size(52, 21);
             Time2.TabIndex = 4;
-            Time2.Text = $"{reserve.dtg.Hour}:{reserve.dtg.Minute}:{reserve.dtg.Second}";
+            Time2.Text = $"{reserve.dtg.ToString().Split(' ')[1]}";
 
             this.Controls.Add(backgroundPanel);
             backgroundPanel.ResumeLayout(false);
@@ -157,7 +159,7 @@ namespace Boundary
         private void cancel(object sender, EventArgs e)
         {
             //Gotta somehow get the resID from the reservation in the display event
-            CancelController.cancel(this.reservation);
+            CancelController.cancel(this.userAccount, this.reservation);
             this.Close();
         }
 

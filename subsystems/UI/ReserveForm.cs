@@ -29,39 +29,9 @@ namespace Boundary
         private void submit(object sender, EventArgs e)
         {
             //Have to again map the Form data back to a reservation
-            Reservation room = new Reservation(new Account("jawilt", "admin", "test123", "James"), new Room(1, "Mcknight")); //Fake Data
+            Reservation room = new Reservation(1, new Account("jawilt", "admin", "test123", "James"), new Room(1, "Mcknight"), DateTime.Now); //Fake Data
             ReserveController.submit(room);
             this.Close();
-        }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void From_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void To_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

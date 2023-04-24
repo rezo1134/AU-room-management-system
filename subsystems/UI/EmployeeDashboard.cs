@@ -101,7 +101,7 @@ namespace Boundary
 
                 room2.AutoSize = true;
                 room2.Font = new Font("Segoe UI", 12F, GraphicsUnit.Point);
-                room2.Location = new Point(130, 33);
+                room2.Location = new Point(135, 33);
                 room2.Name = $"{res.roomID}";
                 room2.Size = new Size(127, 21);
                 room2.TabIndex = 0;

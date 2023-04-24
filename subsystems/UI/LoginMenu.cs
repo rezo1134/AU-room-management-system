@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -32,15 +33,6 @@ namespace Boundary
             controller.userLogin(username, password);
         }
 
-        private void passwordTextChanged(object sender, EventArgs e)
-        {
-            string maskedPass = "";
-            foreach(char c in this.password.Text)
-            {
-                maskedPass = maskedPass + "*";
-            }
-            this.password.Text = maskedPass;
-        }
         public static void display(string message)
         {
             MessageBox.Show(message);

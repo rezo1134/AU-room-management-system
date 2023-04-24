@@ -100,7 +100,7 @@ namespace Boundary
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(346, 23);
             this.password.TabIndex = 6;
-            this.password.TextChanged += new System.EventHandler(this.passwordTextChanged);
+            this.password.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -119,9 +119,8 @@ namespace Boundary
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
             this.errorLabel.Location = new System.Drawing.Point(314, 342);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(271, 15);
+            this.errorLabel.Size = new System.Drawing.Size(0, 15);
             this.errorLabel.TabIndex = 8;
-            this.errorLabel.Text = "";
             this.errorLabel.Visible = false;
             // 
             // LoginMenu
@@ -139,6 +138,7 @@ namespace Boundary
             this.Controls.Add(this.cancel);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "LoginMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
