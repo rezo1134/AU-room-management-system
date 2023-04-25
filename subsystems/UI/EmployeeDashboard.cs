@@ -30,8 +30,6 @@ namespace Boundary
 
             foreach (Room res in resourceList.rooms)
             {
-
-
                 Panel card = new Panel();
                 Panel innercard = new Panel();
                 Label rlabel = new Label();
@@ -149,7 +147,7 @@ namespace Boundary
             string building = btn.Name.Split('-')[2];
 
             ReserveController controller = new ReserveController(this);
-            controller.reserve(roomID, building);
+            controller.reserve(this.userAccount, roomID, building);
             this.Close(); //Close immediately after sending deets to the Controller
         }
         public static void Launch(Account userAccount, Entity.List list)

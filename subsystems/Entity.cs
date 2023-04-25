@@ -78,15 +78,17 @@ namespace Entity
         }
         public Account user { get; set; }
         public Room room { get; set; }
-        public DateTime dtg { get; set; } 
+        public DateTime startTime { get; set; }
+        public DateTime stopTime { get; set; }
 
         //For grabbing old reservations from DB
-        public Reservation(int resID, Account userAccount, Room room, DateTime dtg)
+        public Reservation(int resID, Account userAccount, Room room, DateTime start, DateTime stop)
         {
             this.resID = resID;
             this.user = userAccount;
             this.room = room;
-            this.dtg = dtg;
+            this.startTime = start;
+            this.stopTime = stop;
         }
     }
 }

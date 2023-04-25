@@ -55,6 +55,7 @@ namespace Boundary
             this.button1.TabIndex = 1;
             this.button1.Text = "Logout";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.logoutClick);
             // 
             // panel1
             // 

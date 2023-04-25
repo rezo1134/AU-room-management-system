@@ -56,14 +56,14 @@ namespace Controller
                     cmd.CommandText = table;
                     cmd.ExecuteNonQuery();
                     table = @"CREATE TABLE [LOGIN] (
-                                  [timestamp] TEXT NOT NULL
+                                  [timestamp] DATETIME NOT NULL
                                 , [accid] INTEGER NOT NULL
                                 , FOREIGN KEY([accid]) REFERENCES [ACCOUNT]([id])
                                 );";
                     cmd.CommandText = table;
                     cmd.ExecuteNonQuery();
                     table = @"CREATE TABLE [LOGOUT] (
-                                  [timestamp] TEXT NOT NULL
+                                  [timestamp] DATETIME NOT NULL
                                 , [accid] INTEGER NOT NULL
                                 , FOREIGN KEY([accid]) REFERENCES [ACCOUNT]([id])
                                 );";
@@ -77,8 +77,8 @@ namespace Controller
                     cmd.ExecuteNonQuery();
                     table = @"CREATE TABLE [RESERVATION] (
                                   [reservationid] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-                                , [date] TEXT NOT NULL
-                                , [time] TEXT NOT NULL
+                                , [startTime] DATETIME NOT NULL
+                                , [stopTime] DATETIME NOT NULL
                                 , [employeeid] TEXT NOT NULL
                                 , [roomid] TEXT NOT NULL
                                 , FOREIGN KEY([employeeid]) REFERENCES [ACCOUNT]([id])
@@ -97,15 +97,10 @@ namespace Controller
                                 INSERT INTO ROOM (building) VALUES ('Lejuene');
                                 INSERT INTO ROOM (building) VALUES ('Grant');
                                 INSERT INTO ROOM (building) VALUES ('Hall');
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/22/2023', '8:00', 1, 1);
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/22/2023', '9:00', 2, 2);
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/23/2023', '12:00', 3, 4);
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/23/2023', '13:00', 3, 4);
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/25/2023', '14:00', 2, 1);
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/25/2023', '10:00', 4, 5);
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/26/2023', '8:00', 1, 4);
-                                INSERT INTO RESERVATION (date, time, employeeid, roomid) VALUES ('4/26/2023', '9:00', 1, 1);
-
+                                INSERT INTO RESERVATION (startTime, stopTime, employeeid, roomid) VALUES ('2023-04-22 08:00:00','2023-04-22 09:00:00', 1, 1);
+                                INSERT INTO RESERVATION (startTime, stopTime, employeeid, roomid) VALUES ('2023-04-22 09:00:00','2023-04-22 10:00:00', 2, 2);
+                                INSERT INTO RESERVATION (startTime, stopTime, employeeid, roomid) VALUES ('2023-04-23 12:00:00','2023-04-23 13:00:00', 3, 4);
+                                INSERT INTO RESERVATION (startTime, stopTime, employeeid, roomid) VALUES ('2023-04-23 13:00:00','2023-04-23 15:00:00', 3, 4);
                                 COMMIT;";
                     cmd.CommandText = strSql;
                     cmd.Parameters.AddWithValue("$hashpwd1", "1qaz".GetHashCode());
@@ -174,16 +169,16 @@ namespace Controller
                             while (rdr.Read())
                             {
                                 int id = rdr.GetInt32(0);
-                                string date = (string)rdr["date"];
-                                string time = (string)rdr["time"];
+                                DateTime startTime = (DateTime)rdr["startTime"];
+                                DateTime stopTime = (DateTime)rdr["stopTime"];
                                 int roomid = int.Parse(rdr["roomid"].ToString());
                                 string name = (string)rdr["name"];
                                 string username = (string)rdr["username"];
                                 string password = (string)rdr["password"];
                                 string role = (string)rdr["type"];
                                 string building = (string)rdr["building"];
-                                Debug.WriteLine(DateTime.Parse($"{date} {time}").ToString());
-                                resourceList.Add(new Reservation(id, new Account(username, role, password, name), new Room(roomid, building), DateTime.Parse($"{date} {time}")));
+                                Debug.WriteLine(DateTime.Parse($"{startTime}").ToString());
+                                resourceList.Add(new Reservation(id, new Account(username, role, password, name), new Room(roomid, building), startTime, stopTime));
                             }
                         }
                     }
@@ -244,9 +239,9 @@ namespace Controller
                     cmnd.Connection = conn;
                     cmnd.CommandText = stm;
                     cmnd.Parameters.AddWithValue("$id", id);
-                    cmnd.Parameters.AddWithValue("$time", DateTime.Now.ToString());
+                    cmnd.Parameters.AddWithValue("$time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmnd.ExecuteNonQuery();
-                    Debug.WriteLine($"Saved Login for {userAccount.username} at {DateTime.Now.ToString()}");
+                    Debug.WriteLine($"Saved Login for {userAccount.username} at {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
                 }
             }
            
@@ -279,7 +274,7 @@ namespace Controller
                     cmnd.Connection = conn;
                     cmnd.CommandText = stm;
                     cmnd.Parameters.AddWithValue("$id", id);
-                    cmnd.Parameters.AddWithValue("$time", DateTime.Now.ToString());
+                    cmnd.Parameters.AddWithValue("$time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmnd.ExecuteNonQuery();
                     Debug.WriteLine("Saved Logout");
 
@@ -304,8 +299,8 @@ namespace Controller
                         while (rdr.Read())
                         {
                             int id = rdr.GetInt32(0);
-                            string date = (string)rdr["date"];
-                            string time = (string)rdr["time"];
+                            DateTime startTime = (DateTime)rdr["startTime"];
+                            DateTime stopTime = (DateTime)rdr["stopTime"];
                             int empid = int.Parse(rdr["employeeid"].ToString());
                             int roomid = int.Parse(rdr["roomid"].ToString());
                             string name = (string)rdr["name"];
@@ -314,7 +309,7 @@ namespace Controller
                             string role = (string)rdr["type"];
                             string building = (string)rdr["building"];
                             Debug.WriteLine($"Reservation: {id}");
-                            res = new Reservation(id, new Account(username, role, password, name), new Room(roomid, building), DateTime.Parse($"{date} {time}"));
+                            res = new Reservation(id, new Account(username, role, password, name), new Room(roomid, building), startTime, stopTime);
                         }
                     }
                 }
@@ -322,8 +317,7 @@ namespace Controller
             return res;
         }
 
-
-         public static void Save(Reservation reservation)
+        public static void Save(Reservation reservation)
         {
             int employeeid = 0;
 
@@ -345,14 +339,13 @@ namespace Controller
                     }
                 }
 
-                stm = @"INSERT INTO RESERVATION VALUES($reservationid, $date, $time, $employeeid, $roomid);";
+                stm = @"INSERT INTO RESERVATION (startTime, stopTime, employeeid, roomid) VALUES($startTime, $stopTime, $employeeid, $roomid);";
                 using (SQLiteCommand cmnd = new SQLiteCommand())
                 {
                     cmnd.Connection = conn;
                     cmnd.CommandText = stm;
-                    cmnd.Parameters.AddWithValue("$reservationid", reservation.resID);
-                    cmnd.Parameters.AddWithValue("$date", $"{reservation.dtg.ToString().Split(' ')[0]}");
-                    cmnd.Parameters.AddWithValue("$time", $"{reservation.dtg.ToString().Split(' ')[1]}");
+                    cmnd.Parameters.AddWithValue("$startTime", $"{reservation.startTime.ToString("yyyy-MM-dd HH:mm:ss")}");
+                    cmnd.Parameters.AddWithValue("$stopTime", $"{reservation.stopTime.ToString("yyyy-MM-dd HH:mm:ss")}");
                     cmnd.Parameters.AddWithValue("$employeeid", employeeid);
                     cmnd.Parameters.AddWithValue("$roomid", reservation.room.roomID);
                     cmnd.ExecuteNonQuery();
@@ -445,27 +438,19 @@ namespace Controller
             this.form = form;
 
         }
-        public void reserve(int roomID, string building)
+        public void reserve(Account userAccount, int roomID, string building)
         {
             //This method creates a reservation object
             Room room = new Room(roomID, building); //placeholder time for creation
-            this.form = new ReserveForm();
-            this.form.Show(); // Create the ReserveForm
-            //this.form.display(room);
-
-            //Then it creates and calls display from the ReserveForm
+            new ReserveForm(userAccount, room).Show(); // Create and display the ReserveForm
         }
 
-        public static void submit(Reservation reservation)
+        public static void submit(Account userAccount, Reservation reservation)
         {
             //This method submits a Reservation
             DBConnector.Save(reservation);
-            Entity.List resourceList = DBConnector.getList(reservation.user);
-
-            if (reservation.user.role == "employee")
-            {
-                EmployeeDashboard.Launch(reservation.user, resourceList);
-            }
+            Entity.List resourceList = DBConnector.getList(userAccount);
+            EmployeeDashboard.Launch(userAccount, resourceList);
         }
     }
 

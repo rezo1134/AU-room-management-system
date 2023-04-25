@@ -117,35 +117,35 @@ namespace Boundary
             Date.AutoSize = true;
             Date.Font = new Font("Segoe UI", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point);
             Date.Location = new Point(37, 183);
-            Date.Name = "Date";
+            Date.Name = "From";
             Date.Size = new Size(50, 21);
             Date.TabIndex = 3;
-            Date.Text = "Date:";
+            Date.Text = "From:";
 
             Date2.AutoSize = true;
             Date2.Font = new Font("Segoe UI", 12F, GraphicsUnit.Point);
             Date2.Location = new Point(85, 183);
-            Date2.Name = "Date2";
+            Date2.Name = "Datetime";
             Date2.Size = new Size(50, 21);
             Date2.TabIndex = 3;
-            Date2.Text = $"{reserve.dtg.ToString().Split(' ')[0]}";
+            Date2.Text = $"{reserve.startTime.ToString("MM/dd/yyyy HH:mm")}";
 
             // Time
             Time.AutoSize = true;
             Time.Font = new Font("Segoe UI", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point);
             Time.Location = new Point(37, 238);
-            Time.Name = "Time";
+            Time.Name = "To";
             Time.Size = new Size(52, 21);
             Time.TabIndex = 4;
-            Time.Text = $"Time:";
+            Time.Text = $"To:";
 
             Time2.AutoSize = true;
             Time2.Font = new Font("Segoe UI", 12F, GraphicsUnit.Point);
             Time2.Location = new Point(85, 238);
-            Time2.Name = "Time2";
+            Time2.Name = "Datetime2";
             Time2.Size = new Size(52, 21);
             Time2.TabIndex = 4;
-            Time2.Text = $"{reserve.dtg.ToString().Split(' ')[1]}";
+            Time2.Text = $"{reserve.stopTime.ToString("MM/dd/yyyy HH:mm")}";
 
             this.Controls.Add(backgroundPanel);
             backgroundPanel.ResumeLayout(false);
@@ -162,11 +162,5 @@ namespace Boundary
             CancelController.cancel(this.userAccount, this.reservation);
             this.Close();
         }
-
-        public void display(Reservation reservation)
-        {
-            //This needs to transform the reservation into the 
-        }
-
     }
 }
