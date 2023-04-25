@@ -392,9 +392,28 @@ namespace Controller
             {
                 return false;
             }
+            //If password or user is under 8 or over 12, not valid
+            if (password.Length < 8 || password.Length > 12 || username.Length < 8 || username.Length > 12)
+                return false;
+            //If pass or user contains no-no character, not valid
+            if (username.ContainsAny(" ","/","\\",".",";",":") || password.ContainsAny(" ","/","\\",".",";",":"))
+                return false;
+            //Password validation
+            int digits = 0;
+            int capitals = 0;
+            foreach (char chr in password)
+            {
+                if (chr.IsNumber())
+                    digits++;
+                if (chr.IsUpper())
+                    capitals++;
+            }
+            if (digits == 0 && capitals == 0)
+                return false;
+
             return true;
-            
         }
+        
         public void userLogin(string username, string password)
         {
             //This method validates the input of the username and password then calls the GetUserAccount
