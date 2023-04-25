@@ -142,7 +142,7 @@ namespace Boundary
                 employee2.Name = $"{reserve.user.name}-{counter}";
                 employee2.Size = new Size(127, 21);
                 employee2.TabIndex = 0;
-                employee2.Text = $"{reserve.user.name}-{counter}";
+                employee2.Text = $"{reserve.user.name}";
 
                 //Configure the Button
                 rbutton.Location = new Point(66, 176);
