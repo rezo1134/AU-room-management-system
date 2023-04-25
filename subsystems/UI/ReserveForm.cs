@@ -60,7 +60,7 @@ namespace Boundary
             startTime = DateTime.Parse($"{this.monthCalendar1.SelectionStart.ToString("yyyy-MM-dd")} {this.From.Text}");
             stopTime = DateTime.Parse($"{this.monthCalendar1.SelectionEnd.ToString("yyyy-MM-dd")} {this.To.Text}");
             Debug.WriteLine($"{startTime} - {stopTime}");
-            Reservation res = new Reservation(1, new Account("jawilt", "admin", "test123", "James"), new Room(1, "Mcknight"), this.startTime, this.stopTime);
+            Reservation res = new Reservation(1, this.userAccount, room, this.startTime, this.stopTime);
             ReserveController.submit(this.userAccount, res);
             this.Close();
         }
