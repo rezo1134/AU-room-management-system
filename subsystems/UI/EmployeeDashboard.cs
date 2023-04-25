@@ -147,7 +147,7 @@ namespace Boundary
             string building = btn.Name.Split('-')[2];
 
             ReserveController controller = new ReserveController(this);
-            controller.reserve(this.userAccount, roomID, building);
+            controller.ReserveRoom(this.userAccount, roomID, building);
             this.Close(); //Close immediately after sending deets to the Controller
         }
         public static void Launch(Account userAccount, Entity.List list)
@@ -155,9 +155,9 @@ namespace Boundary
             new EmployeeDashboard(userAccount, list).Show();
         }
 
-        private void logoutClick(object sender, EventArgs e)
+        private void Logout(object sender, EventArgs e)
         {
-            LogoutController.logout(new Account("jawilt", "employee", "test123", "James"));
+            LogoutController.Logout(new Account("jawilt", "employee", "test123", "James"));
             this.Close();
         }
     }

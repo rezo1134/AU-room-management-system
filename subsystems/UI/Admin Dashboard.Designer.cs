@@ -44,7 +44,7 @@ namespace Boundary
             this.logout.TabIndex = 2;
             this.logout.Text = "Logout";
             this.logout.UseVisualStyleBackColor = true;
-            this.logout.Click += new System.EventHandler(this.logoutClick);
+            this.logout.Click += new System.EventHandler(this.Logout);
             // 
             // label1
             // 

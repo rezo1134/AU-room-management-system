@@ -156,10 +156,10 @@ namespace Boundary
 
         }
 
-        private void cancel(object sender, EventArgs e)
+        private void Cancel(object sender, EventArgs e)
         {
             //Gotta somehow get the resID from the reservation in the display event
-            CancelController.cancel(this.userAccount, this.reservation);
+            CancelController.Cancel(this.userAccount, this.reservation);
             this.Close();
         }
     }

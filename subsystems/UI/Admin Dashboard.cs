@@ -152,7 +152,7 @@ namespace Boundary
                 rbutton.Text = "Cancel";
                 rbutton.UseVisualStyleBackColor = true;
 
-                rbutton.Click += new EventHandler(this.submitClick);
+                rbutton.Click += new EventHandler(this.Submit);
 
                 //Add the card to the window
                 this.Controls.Add(card);
@@ -165,20 +165,20 @@ namespace Boundary
 
         }
 
-        private void logoutClick(object sender, EventArgs e)
+        private void Logout(object sender, EventArgs e)
         {
-            LogoutController.logout(this.userAccount);
+            LogoutController.Logout(this.userAccount);
             this.Close();
         }
 
-        public void submitClick(object sender, EventArgs e)
+        public void Submit(object sender, EventArgs e)
         {
             Button btn = sender as Button;
             int resID = int.Parse(btn.Name.Split('-')[1]);
             //We need to know Which component we've referenced for this. for now i'm using "this.card"
             CancelController controller = new CancelController(this);
             Debug.WriteLine($"Cancelling Reservation {resID}");
-            controller.submit(userAccount, resID);
+            controller.Submit(userAccount, resID);
             this.Close(); //Close immediately after sending deets to the Controller
         }
 

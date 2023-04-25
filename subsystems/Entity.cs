@@ -82,13 +82,21 @@ namespace Entity
         public DateTime stopTime { get; set; }
 
         //For grabbing old reservations from DB
-        public Reservation(int resID, Account userAccount, Room room, DateTime start, DateTime stop)
+        public Reservation(int resID, Account userAccount, Room room, DateTime startTime, DateTime stopTime)
         {
             this.resID = resID;
             this.user = userAccount;
             this.room = room;
-            this.startTime = start;
-            this.stopTime = stop;
+            this.startTime = startTime;
+            this.stopTime = stopTime;
+        }
+        //For grabbing new reservations
+        public Reservation(Account userAccount, Room room, DateTime startTime, DateTime stopTime)
+        {
+            this.user = userAccount;
+            this.room = room;
+            this.startTime = startTime;
+            this.stopTime = stopTime;
         }
     }
 }

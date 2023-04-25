@@ -18,7 +18,7 @@ namespace Boundary
             InitializeComponent();
         }
 
-        private void resetClick(object sender, EventArgs e)
+        private void Submit(object sender, EventArgs e)
         {
             //We again need the userAccount object to 
             this.Close();

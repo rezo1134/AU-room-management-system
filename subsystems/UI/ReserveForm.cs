@@ -54,14 +54,14 @@ namespace Boundary
 
         }
 
-        private void submit(object sender, EventArgs e)
+        private void Submit(object sender, EventArgs e)
         {
             //Need to parse the DateRange picker module + TO FROM boxes
             startTime = DateTime.Parse($"{this.monthCalendar1.SelectionStart.ToString("yyyy-MM-dd")} {this.From.Text}");
             stopTime = DateTime.Parse($"{this.monthCalendar1.SelectionEnd.ToString("yyyy-MM-dd")} {this.To.Text}");
             Debug.WriteLine($"{startTime} - {stopTime}");
-            Reservation res = new Reservation(1, this.userAccount, room, this.startTime, this.stopTime);
-            ReserveController.submit(this.userAccount, res);
+            Reservation res = new Reservation(this.userAccount, room, this.startTime, this.stopTime);
+            ReserveController.Submit(this.userAccount, res);
             this.Close();
         }
     }

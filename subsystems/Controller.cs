@@ -17,11 +17,25 @@ namespace Controller
         {
             this.form = form;
         }
+        protected Controller() { }
+    }
+
+    public class StartupController: Controller
+    {
+        public StartupController(): base()
+        {
+            
+        }
+        public void Initiate()
+        {
+            DBConnector.InitializeDB();
+            new LoginMenu().Show();
+        }
     }
 
     public static class DBConnector
     {
-        public static void initializeDB()
+        public static void InitializeDB()
         {
             //DB Initialization. This should read data in from a flat file and create all the tables
             if (!File.Exists(Path.Combine(Environment.CurrentDirectory, @"Data\", "RoomsDB.db")))
@@ -87,10 +101,10 @@ namespace Controller
                     cmd.CommandText = table;
                     cmd.ExecuteNonQuery();
                     strSql = @"BEGIN TRANSACTION; 
-                                INSERT INTO ACCOUNT (username, type, password, name) VALUES ('adm', 'admin', $hashpwd1, 'John');
-                                INSERT INTO ACCOUNT (username, type, password, name) VALUES ('emp', 'employee', $hashpwd2, 'Joe');
+                                INSERT INTO ACCOUNT (username, type, password, name) VALUES ('adminuser', 'admin', $hashpwd1, 'John');
+                                INSERT INTO ACCOUNT (username, type, password, name) VALUES ('employeeuser', 'employee', $hashpwd2, 'Joe');
                                 INSERT INTO ACCOUNT (username, type, password, name) VALUES ('jawilt-adm', 'admin', $hashpwd3, 'James');
-                                INSERT INTO ACCOUNT (username, type, password, name) VALUES ('jawilt', 'employee', $hashpwd4, 'James');
+                                INSERT INTO ACCOUNT (username, type, password, name) VALUES ('jawilt-emp', 'employee', $hashpwd4, 'James');
                                 INSERT INTO ROOM (building) VALUES ('Mcknight');
                                 INSERT INTO ROOM (building) VALUES ('Barret');
                                 INSERT INTO ROOM (building) VALUES ('Gracie');
@@ -103,20 +117,22 @@ namespace Controller
                                 INSERT INTO RESERVATION (startTime, stopTime, employeeid, roomid) VALUES ('2023-04-23 13:00:00','2023-04-23 15:00:00', 3, 4);
                                 COMMIT;";
                     cmd.CommandText = strSql;
-                    cmd.Parameters.AddWithValue("$hashpwd1", "1qaz".GetHashCode());
-                    cmd.Parameters.AddWithValue("$hashpwd2", "2wsx".GetHashCode());
-                    cmd.Parameters.AddWithValue("$hashpwd3", "admin123".GetHashCode());
-                    cmd.Parameters.AddWithValue("$hashpwd4", "qwer".GetHashCode());
+                    cmd.Parameters.AddWithValue("$hashpwd1", "admin123".GetHashCode());
+                    cmd.Parameters.AddWithValue("$hashpwd2", "employee123".GetHashCode());
+                    cmd.Parameters.AddWithValue("$hashpwd3", "jawiltadm123".GetHashCode());
+                    cmd.Parameters.AddWithValue("$hashpwd4", "jawilt123".GetHashCode());
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
             }
 
         Debug.WriteLine("Initialized");
+        
         }
 
-        public static Account getUserAccount(string username, string password)
+        public static Account GetUserAccount(string username, string password)
         {
+            Debug.WriteLine($"{password}");
             string root = "Data Source=" + Path.Combine(Environment.CurrentDirectory, @"Data\", "RoomsDB.db");
             using (SQLiteConnection conn = new SQLiteConnection(root))
             {
@@ -151,7 +167,7 @@ namespace Controller
             }
         }
 
-        public static Entity.List getList(Account userAccount)
+        public static Entity.List GetList(Account userAccount)
         {
             if (userAccount.role == "admin")
             {
@@ -212,7 +228,7 @@ namespace Controller
             
         }
 
-        public static void saveLogin(Account userAccount)
+        public static void SaveLogin(Account userAccount)
         {
             //This method saves the login user and time to the database
             string root = "Data Source=" + Path.Combine(Environment.CurrentDirectory, @"Data\", "RoomsDB.db");
@@ -247,7 +263,7 @@ namespace Controller
            
         }
 
-        public static void saveLogout(Account userAccount)
+        public static void SaveLogout(Account userAccount)
         {
             //This method saves the login user and time to the database
             string root = "Data Source=" + Path.Combine(Environment.CurrentDirectory, @"Data\", "RoomsDB.db");
@@ -282,7 +298,7 @@ namespace Controller
             }
         }
 
-        public static Reservation getReservation(int resID)
+        public static Reservation GetReservation(int resID)
         {
             //This method Deletes a Reservation from the database via the resID primary key
             Reservation res = null;
@@ -355,7 +371,7 @@ namespace Controller
             Debug.WriteLine("Saved Reservation");
         }
 
-        public static void cancelReservation(Reservation reservation)
+        public static void CancelReservation(Reservation reservation)
         {
             //This method Deletes a Reservation from the database via the resID primary key
             string root = "Data Source=" + Path.Combine(Environment.CurrentDirectory, @"Data\", "RoomsDB.db");
@@ -385,7 +401,7 @@ namespace Controller
             //This is the Login Controller Constructor
         }
 
-        public bool validateInput(string username, string password)
+        public bool ValidateInput(string username, string password)
         //Define what our username and password specification should be
         {
             if (username == null || password == null)
@@ -405,9 +421,9 @@ namespace Controller
             int capitals = 0;
             foreach (char chr in password)
             {
-                if (chr.IsNumber())
+                if (char.IsNumber(chr))
                     digits++;
-                if (chr.IsUpper())
+                if (char.IsUpper(chr))
                     capitals++;
             }
             if (digits == 0 && capitals == 0)
@@ -416,21 +432,21 @@ namespace Controller
             return true;
         }
         
-        public void userLogin(string username, string password)
+        public void UserLogin(string username, string password)
         {
             //This method validates the input of the username and password then calls the GetUserAccount
-            if (this.validateInput(username, password) == true)
+            if (this.ValidateInput(username, password) == true)
             {
                 //After validation, we create a dbconnector and get the user account
-                Account userAccount = DBConnector.getUserAccount(username, password);
+                Account userAccount = DBConnector.GetUserAccount(username, password);
                 if (userAccount == null)
                 {
-                    LoginMenu.display("Incorrect Username or Password; Please Try Again.");
+                    LoginMenu.Display("Incorrect Username or Password; Please Try Again.");
                 }
                 else
                 {
-                    DBConnector.saveLogin(userAccount);
-                    Entity.List resourceList = DBConnector.getList(userAccount);
+                    DBConnector.SaveLogin(userAccount);
+                    Entity.List resourceList = DBConnector.GetList(userAccount);
 
                     if (userAccount.role == "admin")
                     {
@@ -446,7 +462,7 @@ namespace Controller
             }
             else
             {
-                LoginMenu.display("Please enter a valid Username or Password.");
+                LoginMenu.Display("Please enter a valid Username or Password.");
             }
         }
     }
@@ -459,18 +475,18 @@ namespace Controller
             this.form = form;
 
         }
-        public void reserve(Account userAccount, int roomID, string building)
+        public void ReserveRoom(Account userAccount, int roomID, string building)
         {
             //This method creates a reservation object
             Room room = new Room(roomID, building); //placeholder time for creation
             new ReserveForm(userAccount, room).Show(); // Create and display the ReserveForm
         }
 
-        public static void submit(Account userAccount, Reservation reservation)
+        public static void Submit(Account userAccount, Reservation reservation)
         {
             //This method submits a Reservation
             DBConnector.Save(reservation);
-            Entity.List resourceList = DBConnector.getList(userAccount);
+            Entity.List resourceList = DBConnector.GetList(userAccount);
             EmployeeDashboard.Launch(userAccount, resourceList);
         }
     }
@@ -482,11 +498,11 @@ namespace Controller
             this.form = form;
         }
 
-        public static void cancel(Account userAccount, Reservation reservation)
+        public static void Cancel(Account userAccount, Reservation reservation)
         {
             //This method cancels a reservation based on the Reservation Primary Key in the DB
-            DBConnector.cancelReservation(reservation);
-            Entity.List resourceList = DBConnector.getList(userAccount);
+            DBConnector.CancelReservation(reservation);
+            Entity.List resourceList = DBConnector.GetList(userAccount);
 
             if (userAccount.role == "admin")
             {
@@ -494,14 +510,11 @@ namespace Controller
             }
         }
 
-        public void submit(Account userAccount, int resID)
+        public void Submit(Account userAccount, int resID)
         {
-            //This method sumbits a getReservation request to the dbconnector and gets a reservation in return
-            Reservation reservation = DBConnector.getReservation(resID);
+            //This method sumbits a GetReservation request to the dbconnector and gets a reservation in return
+            Reservation reservation = DBConnector.GetReservation(resID);
             new CancelForm(userAccount, reservation).Show(); // Create the ReserveForm
-            //this.form.Show();
-            //this.form.display(reservation);
-
         }
     }
 
@@ -511,9 +524,9 @@ namespace Controller
         {
             this.form = form;
         }
-        public static void logout(Account userAccount)
+        public static void Logout(Account userAccount)
         {
-            DBConnector.saveLogout(userAccount);
+            DBConnector.SaveLogout(userAccount);
             new LogoutMenu().Show();
         }
     }

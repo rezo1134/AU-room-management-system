@@ -20,22 +20,22 @@ namespace Boundary
             InitializeComponent();
         }
 
-        private void cancel_Click(object sender, EventArgs e)
+        private void Cancel(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void submit(object sender, EventArgs e)
+        private void Submit(object sender, EventArgs e)
         {
             string username = this.username.Text;
             string password = this.password.Text;
             LoginController controller = new LoginController(this);
-            controller.userLogin(username, password);
+            controller.UserLogin(username, password);
         }
 
-        public static void display(string message)
+        public static void Display(string ErrorMessage)
         {
-            MessageBox.Show(message);
+            MessageBox.Show(ErrorMessage);
         }
         
     }

@@ -49,7 +49,7 @@ namespace Boundary
             this.cancel.TabIndex = 0;
             this.cancel.Text = "Cancel";
             this.cancel.UseVisualStyleBackColor = true;
-            this.cancel.Click += new System.EventHandler(this.cancel_Click);
+            this.cancel.Click += new System.EventHandler(this.Cancel);
             // 
             // enter
             // 
@@ -61,7 +61,7 @@ namespace Boundary
             this.enter.TabIndex = 1;
             this.enter.Text = "Enter";
             this.enter.UseVisualStyleBackColor = true;
-            this.enter.Click += new System.EventHandler(this.submit);
+            this.enter.Click += new System.EventHandler(this.Submit);
             // 
             // username
             // 
