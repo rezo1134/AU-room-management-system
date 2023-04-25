@@ -396,7 +396,9 @@ namespace Controller
             if (password.Length < 8 || password.Length > 12 || username.Length < 8 || username.Length > 12)
                 return false;
             //If pass or user contains no-no character, not valid
-            if (username.ContainsAny(" ","/","\\",".",";",":") || password.ContainsAny(" ","/","\\",".",";",":"))
+            if (username.Contains(" ") || username.Contains("/") || username.Contains("\\") || username.Contains(".") || username.Contains(";") || username.Contains(":"))
+                return false;
+            if (password.Contains(" ") || password.Contains("/") || password.Contains("\\") || password.Contains(".") || password.Contains(";") || password.Contains(":"))
                 return false;
             //Password validation
             int digits = 0;
